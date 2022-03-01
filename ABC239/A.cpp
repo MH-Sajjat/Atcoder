@@ -50,51 +50,6 @@ template <TN T> T lcm(T a, T b) { return a * (b / gcd(a, b)); }
 
 /*........................ let's try one more time ........................*/
 
-vi g[N], val[N];
-vector<bool> vis(N, 0);
-int ar[N];
-
-void merge(vi& v1, vi& v2) {
-  int cnt = 20;
-  vi v;
-  int n = szof(v1), m = szof(v2);
-  int i = 0, j = 0;
-  while (i < n and j < m and cnt) {
-    if (v1[i] > v2[j]) {
-      v.pb(v1[i]);
-      i++;
-    } else {
-      v.pb(v2[j]);
-      j++;
-    }
-    cnt--;
-  }
-  while (i < n and cnt) {
-    v.pb(v1[i]);
-      i++;
-      cnt--;
-  }
-  while (j < m and cnt) {
-    v.pb(v2[j]);
-      j++;
-    cnt--;
-  }
-  v1.clear();
-  for (auto x : v) {
-    v1.pb(x);
-  }
-}
-
-void dfs(int u) {
-  val[u].pb(ar[u]);
-  vis[u] = 1;
-  for (auto v : g[u]) {
-    if (vis[v]) continue;
-    dfs(v);
-    merge(val[u], val[v]);
-  }
-}
-
 int main() {
 #ifdef LOCAL
   freopen("input.txt", "r", stdin);
@@ -103,21 +58,11 @@ int main() {
   // Fast_IO
   int test = 1, tc = 0;
   while (test--) {
-    int n, q;
-    cin >> n >> q;
-    for (int i = 1; i <= n; ++i) cin >> ar[i];
-    for (int i = 1; i < n; ++i) {
-      int u, v;
-      cin >> u >> v;
-      g[u].pb(v);
-      g[v].pb(u);
-    }
-    dfs(1);
-    while (q--) {
-      int u, k;
-      cin >> u >> k;
-      cout << val[u][k - 1] << nl;
-    }
+    int n = Int();
+    long double res = n;
+    res *= ((long double) (12800000 + n));
+    res = sqrt(res);
+    cout << fixed << setprecision(10) << res << endl;
   }
   return 0;
 }
